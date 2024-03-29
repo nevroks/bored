@@ -6,3 +6,8 @@ export interface ITodo {
     "price":number,
     "key":number
 }
+export interface IUser {
+    name:string,
+    password:string
+
+}

@@ -1,3 +1,13 @@
 .header{
     background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header__navigation{
+    display: flex;
+    column-gap: 30px;
+}
+.header__navigation a.active{
+    color: gray!important;
 }

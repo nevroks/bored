@@ -106,6 +106,7 @@ legend {
 }
 *{
   font-family: "Roboto Condensed", sans-serif;
+  color: var(--font-color);
   font-weight: 400;
   font-size: 24px;
 }

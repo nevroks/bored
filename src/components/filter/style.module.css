@@ -1,0 +1,9 @@
+.filter{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.filter_btns{
+    display: flex;
+    justify-content: space-between;
+}

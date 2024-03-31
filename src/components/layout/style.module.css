@@ -1,12 +1,13 @@
 .layoutS{
-
     display: grid;
-    grid-template-rows: 75px 100% 75px;
+    grid-template-rows: 75px 92% 75px;
     height: -webkit-fill-available;
 }
 .page{
-    background-color: khaki;
+    background-color: var(--bg-color);
     padding: 0 calc(50% - 750px);
-    height: -webkit-fill-available;
     min-height: 100vh;
+}
+header,footer{
+    padding: 0 calc(50% - 750px);
 }

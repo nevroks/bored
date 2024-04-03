@@ -1,5 +1,4 @@
 import {Route, Routes} from "react-router-dom";
-import React from "react";
 import Layout from "./components/layout/Layout.tsx";
 import HomePage from "./pages/homepage/HomePage.tsx";
 import TodosPage from "./pages/todospage/TodosPage.tsx";

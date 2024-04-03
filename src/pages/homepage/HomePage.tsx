@@ -15,6 +15,7 @@ const HomePage = () => {
     const isAuthorized=useAppSelector(state => state.auth.value)
     const todo=useAppSelector(state => state.singleTodo.todo)
     const [isFilterShown,setIsFilterShown]=useState(false)
+    const [isFiltered,setIsFiltered]=useState(false)
     const dispatch=useAppDispatch()
 
     useEffect(()=>{
@@ -36,7 +37,7 @@ const HomePage = () => {
                 <Button onClick={handleRequest}>Запросить туду</Button>
             </div>
             {isFilterShown && <PopUp offerFunc={setIsFilterShown}>
-                <Filter/>
+                <Filter setIsFiltered={setIsFiltered}/>
             </PopUp>}
             {todo && <Todo todo={todo}/>}
         </div>

@@ -7,6 +7,9 @@ export interface ITodo {
     "favorite":boolean,
     "key":number
 }
+export interface IFavoriteTodo extends ITodo{
+    "addDate":number
+}
 export interface IUser {
     name:string,
     password:string

@@ -1,20 +1,27 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {ITodo} from "../../types/types.tsx";
+import {IFavoriteTodo} from "../../types/types.tsx";
 
 
-const initialState:Array<ITodo> = []
+const initialState:Array<IFavoriteTodo> = []
 
 export const todoSlice = createSlice({
     name: 'todo',
     initialState,
     reducers: {
-        addTodoToFavorites:(state,action:PayloadAction<ITodo>)=>{
-            state.push(action.payload)
+        toggleFavoritesTodo:(state,action:PayloadAction<IFavoriteTodo>)=>{
+            const todo=action.payload
+            if (state.find(favoritesTodo=>favoritesTodo.key===todo.key)){
+                const index=state.indexOf(state.filter(favoriteTodo=>favoriteTodo.key===todo.key)[0])
+                state.splice(index,1)
+            }else{
+                const todoToPush={...todo,favorite:true,addDate:Date.now()}
+                state.push(todoToPush)
+            }
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { addTodoToFavorites} = todoSlice.actions
+export const {toggleFavoritesTodo} = todoSlice.actions
 
 export default todoSlice.reducer

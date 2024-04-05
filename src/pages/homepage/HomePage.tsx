@@ -14,6 +14,7 @@ const HomePage = () => {
     const navigate=useNavigate()
     const isAuthorized=useAppSelector(state => state.auth.value)
     const todo=useAppSelector(state => state.singleTodo.todo)
+    const filterSettings=useAppSelector(state => state.filterSettings)
     const [isFilterShown,setIsFilterShown]=useState(false)
     const [isFiltered,setIsFiltered]=useState(false)
     const dispatch=useAppDispatch()
@@ -24,12 +25,12 @@ const HomePage = () => {
         }
     },[isAuthorized])
     const handleRequest=()=>{
-       // getTodo()
+        dispatch(fetchSingleTodo({isFiltered,filterSettings}))
     }
     // Init
     useEffect(()=>{
         dispatch(fetchSingleTodo())
-    },[!todo])
+    },[])
     return (
         <div className={classes.page__content}>
             <div>

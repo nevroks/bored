@@ -2,7 +2,9 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import todoReducer from "./todos/todoSlice.ts"
 import authReducer from "./auth/authSlice.ts"
 import singleTodoReducer from "./singletodo/singleTodoSlice.ts"
+import filterSettingsReducer from "./filterSettings/filterSettingsSlice.ts"
 import storage from 'redux-persist/lib/storage'
+
 import {
     persistStore,
     persistReducer,
@@ -17,12 +19,14 @@ const reducers = combineReducers(
     {
         singleTodo:singleTodoReducer,
         todo:todoReducer,
-        auth:authReducer
+        auth:authReducer,
+        filterSettings:filterSettingsReducer
     })
 
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist:["filterSettings"]
 }
 const persistedReducers = persistReducer(persistConfig, reducers)
 

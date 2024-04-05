@@ -1,0 +1,27 @@
+.todo{
+    position: relative;
+    border: 3px solid var(--accent-color);
+    border-radius: 30px;
+    padding: 20px 60px 20px 30px;
+    -webkit-box-shadow: 4px 9px 25px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 9px 25px 1px rgba(0,0,0,0.75);
+    box-shadow: 4px 9px 25px 1px rgba(0,0,0,0.75);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.todo_heart{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: all 0.4s;
+}
+.todo_heart:hover{
+    transform: scale(110%);
+}
+.todoList{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}

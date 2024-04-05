@@ -1,25 +1,21 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import Button from "../ui/button/Button.tsx";
 import Input from "../ui/input/Input.tsx";
 import classes from "./style.module.css";
-import {useAppDispatch} from "../../hooks/reduxHooks.tsx";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks.tsx";
 import CompareObjects from "../../utils/compareObjects.ts";
 import {PriceRange} from "../../consts/priceRange.ts";
 import {AcessibilityRange} from "../../consts/acessibilityRange.ts";
-import {setSingleTodo, setTodo} from "../../store/singletodo/singleTodoSlice.ts";
+import {fetchSingleTodo, setSingleTodo, setTodo} from "../../store/singletodo/singleTodoSlice.ts";
+import {setFilterSettings} from "../../store/filterSettings/filterSettingsSlice.ts";
 
 const Filter = ({setIsFiltered}) => {
     const dispatch=useAppDispatch()
+    const filterSettings =useAppSelector(state => state.filterSettings)
 
-    const [todo,setTodo]=useState({})
     // ------------------------------------------
     //Управляемые инпуты и поля фильтра
-    const [filterSettings,setFilterSettings]=useState({
-        accessibility:'',
-        type:"",
-        participants: '',
-        price:''
-    })
+
     const [inputsValue,setInputsValue]=useState(
         {
             accessibility:'',
@@ -29,71 +25,6 @@ const Filter = ({setIsFiltered}) => {
         }
     )
     //Управляемые инпуты и поля фильтра
-    // ------------------------------------------
-
-    // Честно это пизедц всё какойто
-
-    // ------------------------------------------
-    //Получение url филтра на уровне api
-    const url=useMemo(()=>{
-        let url=`http://www.boredapi.com/api/activity?`
-        let params=0
-        if (filterSettings.participants.length>0){
-            params=params+1
-            url=url+`participants=${filterSettings.participants}`
-        }
-        if (filterSettings.type.length>0){
-            if (params>=1){
-                url=url+`&type=${filterSettings.type}`
-            }else{
-                url=url+`type=${filterSettings.type}`
-            }
-            params=params+1
-        }
-        if (filterSettings.price.length>0){
-            let price=filterSettings.price.split("-")
-            const maxPrice=price[0]
-            const minPrice=price[1]
-            if (params>=1){
-                url=url+`&minprice=${minPrice}&maxprice=${maxPrice}`
-            }else{
-                url=url+`minprice=${minPrice}&maxprice=${maxPrice}`
-            }
-            params=params+1
-        }
-        if (filterSettings.accessibility.length>0){
-            let accessibility=filterSettings.accessibility.split("-")
-            const maxAccessibility=accessibility[0]
-            const minAccessibility=accessibility[1]
-            if (params>=1){
-                url=url+`&minaccessibility=${minAccessibility}&maxaccessibility=${maxAccessibility}`
-            }else{
-                url=url+`minaccessibility=${minAccessibility}&maxaccessibility=${maxAccessibility}`
-            }
-            params=params+1
-        }
-        return url
-    },[filterSettings])
-    //Получение url филтра на уровне api
-    // ------------------------------------------
-
-    // ------------------------------------------
-    //Получение todo уже с фильтром
-    const getTodo=async ()=>{
-        try {
-            const response=await fetch(url)
-
-            if (response.status!=200){
-                throw new Error(`Server Error,Try again status:${response.status}`)
-            }else{
-                const data = await response.json()
-                setTodo(data)
-            }
-        }catch (error){
-            console.log(error.massage)
-        }
-    }
-    //Получение todo уже с фильтром
     // ------------------------------------------
 
     useEffect(()=>{
@@ -111,13 +42,8 @@ const Filter = ({setIsFiltered}) => {
     },[filterSettings])
 
     function handleApply(){
-        setFilterSettings(inputsValue)
-        getTodo()
-
+        dispatch(setFilterSettings(inputsValue))
     }
-    useEffect(()=>{
-        dispatch(setSingleTodo(todo))
-    },[todo])
     return (
         <div className={classes.filter}>
             <label htmlFor="accessibility">Сортировка по доступности:

@@ -3,8 +3,57 @@ import {ITodo} from "../../types/types.tsx";
 
 export const fetchSingleTodo=createAsyncThunk(
     "singleTodo/fetchSingleTodo",
-    async function (_,{rejectWithValue}){
+    async function (props,{rejectWithValue}){
+        console.log(props.isFiltered)
         try {
+        if (props.isFiltered){
+            console.log("хуй")
+            let url=`http://www.boredapi.com/api/activity?`
+            let params=0
+            if (props.filterSettings.participants.length>0){
+                params=params+1
+                url=url+`participants=${props.filterSettings.participants}`
+            }
+            if (props.filterSettings.type.length>0){
+                if (params>=1){
+                    url=url+`&type=${props.filterSettings.type}`
+                }else{
+                    url=url+`type=${props.filterSettings.type}`
+                }
+                params=params+1
+            }
+            if (props.filterSettings.price.length>0){
+                let price=props.filterSettings.price.split("-")
+                const maxPrice=price[0]
+                const minPrice=price[1]
+                if (params>=1){
+                    url=url+`&minprice=${minPrice}&maxprice=${maxPrice}`
+                }else{
+                    url=url+`minprice=${minPrice}&maxprice=${maxPrice}`
+                }
+                params=params+1
+            }
+            if (props.filterSettings.accessibility.length>0){
+                let accessibility=props.filterSettings.accessibility.split("-")
+                const maxAccessibility=accessibility[0]
+                const minAccessibility=accessibility[1]
+                if (params>=1){
+                    url=url+`&minaccessibility=${minAccessibility}&maxaccessibility=${maxAccessibility}`
+                }else{
+                    url=url+`minaccessibility=${minAccessibility}&maxaccessibility=${maxAccessibility}`
+                }
+                params=params+1
+            }
+
+            const response=await fetch(url)
+
+            if (response.status!=200){
+                throw new Error(`Server Error,Try again status:${response.status}`)
+            }else{
+                return await response.json()
+            }
+        }else{
+            console.log("хуй")
             const response=await fetch("http://www.boredapi.com/api/activity/")
 
             if (response.status!=200){
@@ -12,18 +61,12 @@ export const fetchSingleTodo=createAsyncThunk(
             }else{
                 return await response.json()
             }
+        }
+
         }catch (error){
             return rejectWithValue(error.massage)
         }
 
-    }
-)
-export const setSingleTodo=createAsyncThunk(
-    //Бесполезная хуета я и атк понима. но у редакса ошибка вылезает
-    //с которой я ебался нахуй 2 дня и весь редакс перерыл
-    "setSingleTodo/fetchSingleTodo",
-    function (todo:ITodo,{dispatch}){
-        dispatch(setTodo(todo))
     }
 )
 interface initState {
@@ -58,8 +101,8 @@ export const singleTodoSlice = createSlice({
             state.error=null
         })
             .addCase(fetchSingleTodo.fulfilled, (state,{payload}:PayloadAction<ITodo>) => {
-            state.status="resolved"
-            state.todo=payload
+                state.status="resolved"
+                state.todo={...payload,favorite:false}
         })
             .addCase(fetchSingleTodo.rejected, (state,{payload}:PayloadAction<string>) => {
             state.status="rejected"

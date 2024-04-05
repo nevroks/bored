@@ -4,6 +4,7 @@ export interface ITodo {
     "type":"cooking" | "education" | "recreational" | "social" | "diy" | "charity" | "relaxation" | "music" | "busywork" | "",
     "participants": number,
     "price":number,
+    "favorite":boolean,
     "key":number
 }
 export interface IUser {

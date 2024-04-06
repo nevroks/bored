@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import classes from "./style.module.css";
 import Button from "../../components/ui/button/Button.tsx";
 import Input from "../../components/ui/input/Input.tsx";
 import checkPassword from "../../utils/checkPassword.ts"
-import {IUser} from "../../types/types.tsx";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks.tsx";
 import {setAuth} from "../../store/auth/authSlice.ts";
 import {IoIosArrowRoundBack} from "react-icons/io";

@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-interface initState{
+export interface IFilerSettingsState{
     accessibility:string,
     type:string,
     participants: string,
     price:string
 }
-const initialState:initState = {
+const initialState:IFilerSettingsState = {
     accessibility:'',
     type:"",
     participants: '',
@@ -18,8 +18,12 @@ export const filterSettingsSlice = createSlice({
     name: 'filterSettings',
     initialState,
     reducers: {
-        setFilterSettings:(state,{payload}:PayloadAction<initState>)=>{
-            state=payload
+        setFilterSettings:(state,{payload}:PayloadAction<IFilerSettingsState>)=>{
+            state.accessibility=payload.accessibility
+            state.type=payload.type
+            state.price=payload.price
+            state.participants=payload.participants
+
         }
     }
 })

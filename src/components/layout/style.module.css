@@ -1,6 +1,6 @@
 .layoutS{
     display: grid;
-    grid-template-rows: 75px 92% 75px;
+    grid-template-rows: 75px 100% 75px;
     height: -webkit-fill-available;
 }
 .page{

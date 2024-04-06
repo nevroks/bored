@@ -1,4 +1,25 @@
 .page__content{
     min-height: 100%;
     background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.todo{
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    align-items: center;
+    transform: translate(0,-10%);
+}
+.navigation{
+    padding: 5px 12px;
+    border-radius: 12px;
+    border: 2px solid var(--font-color);
+    margin-top: 20px;
+    display: flex;
+    height: fit-content;
+    column-gap: 50px;
+
 }

@@ -1,10 +1,15 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {ITodo} from "../../types/types.tsx";
+import {IFilerSettingsState} from "../filterSettings/filterSettingsSlice.ts";
+
+type FnProps={
+        isFiltered:boolean,
+        filterSettings:IFilerSettingsState
+}
 
 export const fetchSingleTodo=createAsyncThunk(
     "singleTodo/fetchSingleTodo",
-    async function (props,{rejectWithValue}){
-        console.log(props.isFiltered)
+    async function (props:FnProps,{rejectWithValue}){
         try {
         if (props.isFiltered){
             console.log("хуй")
@@ -63,8 +68,9 @@ export const fetchSingleTodo=createAsyncThunk(
             }
         }
 
-        }catch (error){
-            return rejectWithValue(error.massage)
+        }catch (e){
+            // @ts-ignore
+            return rejectWithValue(e.massage)
         }
 
     }
@@ -74,7 +80,9 @@ interface initState {
     status:string | null,
     error:string | null
 }
+
 const initialState:initState = {
+    // @ts-ignore
     todo:{
         activity:'',
         accessibility:0,
@@ -103,7 +111,7 @@ export const singleTodoSlice = createSlice({
             .addCase(fetchSingleTodo.fulfilled, (state,{payload}:PayloadAction<ITodo>) => {
                 state.status="resolved"
                 state.todo={...payload,favorite:false}
-        })
+        })// @ts-ignore
             .addCase(fetchSingleTodo.rejected, (state,{payload}:PayloadAction<string>) => {
             state.status="rejected"
             state.error=payload

@@ -124,3 +124,10 @@ h1,h2{
 body{
   background-color: var(--bg-color);
 }
+button{
+  position: relative;
+  transition: all 0.4s;
+}
+button:active{
+  bottom: -2px;
+}

@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import {Suspense} from 'react';
 import classes from "./style.module.css";
 import {Outlet} from "react-router-dom";
 import Header from "./header/Header.tsx";

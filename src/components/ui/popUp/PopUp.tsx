@@ -10,7 +10,6 @@ type popUpProps ={
 const PopUp:FC<popUpProps> = ({children,offerFunc,type}) => {
     const hidePopUp=()=>{
         offerFunc(false)
-        console.log("onClick={hidePopUp}")
     }
     switch (type){
         case "popUp":

@@ -12,8 +12,7 @@ export const fetchSingleTodo=createAsyncThunk(
     async function (props:FnProps,{rejectWithValue}){
         try {
         if (props.isFiltered){
-            console.log("хуй")
-            let url=`http://www.boredapi.com/api/activity?`
+            let url=`https://www.boredapi.com/api/activity?`
             let params=0
             if (props.filterSettings.participants.length>0){
                 params=params+1
@@ -58,8 +57,7 @@ export const fetchSingleTodo=createAsyncThunk(
                 return await response.json()
             }
         }else{
-            console.log("хуй")
-            const response=await fetch("http://www.boredapi.com/api/activity/")
+            const response=await fetch("https://www.boredapi.com/api/activity/")
 
             if (response.status!=200){
                 throw new Error(`Server Error,Try again status:${response.status}`)

@@ -14,3 +14,18 @@
     padding: 20px;
     background-color: var(--bg-color);
 }
+.instruction_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 999;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.58);
+}
+.instruction_content{
+    padding: 20px;
+}

@@ -1,0 +1,69 @@
+.instruction{
+
+}
+.instruction__info{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+.instruction__info__logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 200px;
+    top: 80px;
+}
+.instruction__info__filter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+    position: absolute;
+    left: 700px;
+    top: 140px;
+}
+.instruction__info__search_page{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    right: 420px;
+    top: 60px;
+}
+.instruction__info__profile_page{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    right: -20px;
+    top: 60px;
+}
+.instruction__info__todo{
+    width: 470px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    position: absolute;
+    top: 390px;
+    left: 130px;
+
+}
+.instruction__info__todo svg{
+
+    transform: scale(300%);
+
+}
+
+.instruction__info__favorite{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 560px;
+    right: 100px;
+}
